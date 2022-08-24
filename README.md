@@ -1,0 +1,1 @@
+# AspDotNetCoreTraining_August2022
