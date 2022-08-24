@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Sample Page";
+}
+@{
+    ViewBag.marks = 78;
+    ViewData["Average"] = 98.8f;
+}
+<div class="text-center">
+    <h1 class="display-4">Sample page</h1>
+    <p>this is the sample page.</p>
+    <h1>The value of J is @ViewBag.j</h1>
+    <h1>The value of marks is @ViewBag.marks</h1>
+    <h1>The value of average is @ViewData["Average"]</h1>
+    <h1>The value of company is @ViewData["CompanyName"]</h1>
+</div>
