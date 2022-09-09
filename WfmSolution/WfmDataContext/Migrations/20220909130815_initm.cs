@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WfmDataContext.Migrations
 {
-    public partial class initial : Migration
+    public partial class initm : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,21 +42,6 @@ namespace WfmDataContext.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    UserName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Role = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.UserName);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Softlock",
                 columns: table => new
                 {
@@ -71,18 +56,26 @@ namespace WfmDataContext.Migrations
                     WfmRemark = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     ManagerStatus = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     MgrStatusComment = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    MgrLastUpdate = table.Column<DateTime>(type: "datetime", nullable: false),
-                    employeesEmployee_id = table.Column<int>(type: "int", nullable: false)
+                    MgrLastUpdate = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Softlock", x => x.LockId);
-                    table.ForeignKey(
-                        name: "FK_Softlock_Employees_employeesEmployee_id",
-                        column: x => x.employeesEmployee_id,
-                        principalTable: "Employees",
-                        principalColumn: "Employee_id",
-                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    UserName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Role = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.UserName);
                 });
 
             migrationBuilder.CreateTable(
@@ -117,11 +110,6 @@ namespace WfmDataContext.Migrations
                 name: "IX_Skillmap_Skillid",
                 table: "Skillmap",
                 column: "Skillid");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Softlock_employeesEmployee_id",
-                table: "Softlock",
-                column: "employeesEmployee_id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -136,10 +124,10 @@ namespace WfmDataContext.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Skills");
+                name: "Employees");
 
             migrationBuilder.DropTable(
-                name: "Employees");
+                name: "Skills");
         }
     }
 }

@@ -151,12 +151,7 @@ namespace WfmDataContext.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("employeesEmployee_id")
-                        .HasColumnType("int");
-
                     b.HasKey("LockId");
-
-                    b.HasIndex("employeesEmployee_id");
 
                     b.ToTable("Softlock");
                 });
@@ -210,17 +205,6 @@ namespace WfmDataContext.Migrations
                     b.Navigation("employees");
 
                     b.Navigation("skills");
-                });
-
-            modelBuilder.Entity("WfmDomainModel.Models.softlock", b =>
-                {
-                    b.HasOne("WfmDomainModel.Models.employees", "employees")
-                        .WithMany()
-                        .HasForeignKey("employeesEmployee_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("employees");
                 });
 #pragma warning restore 612, 618
         }

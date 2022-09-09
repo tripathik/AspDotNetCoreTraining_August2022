@@ -17,7 +17,8 @@ namespace WfmDataContext
         public DbSet<softlock> Softlock { get; set; }
         public DbSet<users> Users { get; set; }
         
-        public WfmDbContext() 
+        
+        public WfmDbContext(DbContextOptions options) : base(options)
         {
 
         }
@@ -29,16 +30,7 @@ namespace WfmDataContext
         //}
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var builder = new ConfigurationBuilder()
-                              .SetBasePath(Directory.GetCurrentDirectory())
-                              .AddJsonFile("appsetting.json");
-            var config = builder.Build();
-            var connectionString = config.GetConnectionString("DBConnectionString");
-
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer(connectionString);
-            }
+            base.OnConfiguring(optionsBuilder);
         }
 
 
@@ -138,9 +130,7 @@ namespace WfmDataContext
                 entity.Property(e => e.LockId)
                 .IsRequired()
                 .ValueGeneratedOnAdd();
-
                 entity.Property(e => e.Employee_id);
-
                 entity.Property(e => e.Manager)
                 .HasMaxLength(30);
 
