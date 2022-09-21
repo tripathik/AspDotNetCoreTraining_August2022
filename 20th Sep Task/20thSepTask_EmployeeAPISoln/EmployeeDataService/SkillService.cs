@@ -11,33 +11,33 @@ namespace EmployeeDataService
 {
     public class SkillService : ISkillService
     {
-        private readonly EmployeeDataContext _employeeDataContext;
-        public SkillService(EmployeeDataContext employeeDataContext)
-        {
-            _employeeDataContext = employeeDataContext;
-        }
+        //private readonly EmployeeDataContext _employeeDataContext;
+        //public SkillService(EmployeeDataContext employeeDataContext)
+        //{
+        //    _employeeDataContext = employeeDataContext;
+        //}
 
-        public async Task<List<SkillDto>> GetAllSkillData()
-        {
-            var result = _employeeDataContext.Skills.Select(x => new SkillDto
-            {
-                Skill_Id = x.Skill_Id,
-                Name = x.Name,
+        //public async Task<List<SkillDto>> GetAllSkillData()
+        //{
+        //    var result = _employeeDataContext.Skills.Select(x => new SkillDto
+        //    {
+        //        Skill_Id = x.Skill_Id,
+        //        Name = x.Name,
 
-            }).ToList();
-            return result;
-        }
+        //    }).ToList();
+        //    return result;
+        //}
 
-        public async Task InsertSkillData(SkillDto skillDto)
-        {
+        //public async Task InsertSkillData(SkillDto skillDto)
+        //{
 
-            SkillDto skills = new SkillDto()
-            {
-                Skill_Id=skillDto.Skill_Id,
-                Name=skillDto.Name,
-            };
-            await _employeeDataContext.AddAsync(skills);
-            _employeeDataContext.SaveChanges();
-        }
+        //    SkillDto skills = new SkillDto()
+        //    {
+        //        Skill_Id=skillDto.Skill_Id,
+        //        Name=skillDto.Name,
+        //    };
+        //    await _employeeDataContext.AddAsync(skills);
+        //    _employeeDataContext.SaveChanges();
+        //}
     }
 }

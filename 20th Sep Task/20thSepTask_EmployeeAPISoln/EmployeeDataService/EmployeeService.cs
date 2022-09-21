@@ -18,39 +18,9 @@ namespace EmployeeDataService
             _employeeDataContext = employeeDataContext;
         }
 
-        public async Task<List<EmployeeDto>> GetAllEmployees()
+        public IEnumerable<EmployeeDto> GetEmployee()
         {
-            var result = _employeeDataContext.Employees.Select(x => new EmployeeDto
-            {
-                Employee_Id = x.Employee_Id,
-                Name = x.Name,
-                Status = x.Status,
-                Manager = x.Manager,
-                WFM_Manager = x.WFM_Manager,
-                Email = x.Email,
-                Lockstatus = x.Lockstatus,
-                Experience = x.Experience,
-
-            }).ToList();
-            return result;
-        }
-
-        public async Task InsertEmployeeData(EmployeeDto employeeDto)
-        {
-
-            Employee employees = new Employee()
-            {
-                Employee_Id = employeeDto.Employee_Id,
-                Name = employeeDto.Name,
-                Email = employeeDto.Email,
-                Status = employeeDto.Status,
-                Manager = employeeDto.Manager,
-                WFM_Manager = employeeDto.WFM_Manager,
-                Experience = employeeDto.Experience,
-                Lockstatus = employeeDto.Lockstatus,
-            };
-            await _employeeDataContext.AddAsync(employees);
-            _employeeDataContext.SaveChanges();
+            throw new System.NotImplementedException();
         }
     }
 }

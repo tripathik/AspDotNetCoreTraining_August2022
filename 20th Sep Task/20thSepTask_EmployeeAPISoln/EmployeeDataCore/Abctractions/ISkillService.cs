@@ -9,7 +9,7 @@ namespace EmployeeDataCore.Abctractions
 {
     public interface ISkillService
     {
-        Task<List<SkillDto>> GetAllSkillData();
-        Task InsertSkillData(SkillDto skillDto);
+        //Task<List<SkillDto>> GetAllSkillData();
+        //Task InsertSkillData(SkillDto skillDto);
     }
 }

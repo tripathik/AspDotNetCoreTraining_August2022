@@ -8,10 +8,6 @@ namespace EmployeeDomainModel.Models
 {
     public class Employee
     {
-        public Employee()
-        {
-            Skills = new HashSet<Skill>();
-        }
         public int Employee_Id { get; set; }
         public string Name { get; set; }
         public string Status { get; set; }
@@ -20,7 +16,8 @@ namespace EmployeeDomainModel.Models
         public string Email { get; set; }
         public string Lockstatus { get; set; }
         public decimal Experience { get; set; }
-        public virtual ICollection<Skill> Skills { get; set; }
+        public ICollection<Skill> Skills { get; set; }
+        public List<EmployeeSkill> EmployeeSkills { get; set; }
 
     }
 }

@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace EmployeeDataCore.ViewModel
 {
-    public class SkillDto
+    public class EmployeeSkillDto
     {
+        public int Employee_Id { get; set; }
+        public EmployeeDto Employee { get; set; }
         public int Skill_Id { get; set; }
-        public string Name { get; set; }
-        public List<EmployeeDto> Employees { get; set; }
+        public SkillDto Skill { get; set; }
     }
 }

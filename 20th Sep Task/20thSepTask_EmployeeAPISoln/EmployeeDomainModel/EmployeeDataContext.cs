@@ -14,22 +14,14 @@ namespace EmployeeDomainModel
     {
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Skill> Skills { get; set; }
-
-        public EmployeeDataContext()
-        {
-
-        }
-
+        public DbSet<EmployeeSkill> EmployeeSkills { get; set; }
         public EmployeeDataContext(DbContextOptions options) : base(options)
         {
 
         }
-
-
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            options.UseSqlServer("data source=ISTLP100\\KRISHNATRIPATHI;Integrated security=true;Database=Employee_DB;Trusted_Connection=True");
-
+            base.OnConfiguring(optionsBuilder);
         }
 
 
@@ -68,6 +60,8 @@ namespace EmployeeDomainModel
 
                 entity.Property(e => e.Experience);
 
+                
+
             });
 
             modelBuilder.Entity<Skill>(entity =>
@@ -79,6 +73,23 @@ namespace EmployeeDomainModel
                 .HasMaxLength(50);
 
             });
+
+            modelBuilder.Entity<Employee>()
+            .HasMany(p => p.Skills)
+            .WithMany(p => p.Employees)
+            .UsingEntity<EmployeeSkill>(
+                j => j
+                    .HasOne(pt => pt.Skill)
+                    .WithMany(t => t.EmployeeSkills)
+                    .HasForeignKey(pt => pt.Skill_Id),
+                j => j
+                    .HasOne(pt => pt.Employee)
+                    .WithMany(p => p.EmployeeSkills)
+                    .HasForeignKey(pt => pt.Employee_Id),
+                j =>
+                {
+                    j.HasKey(t => new { t.Employee_Id, t.Skill_Id });
+                });
         }
 
     }

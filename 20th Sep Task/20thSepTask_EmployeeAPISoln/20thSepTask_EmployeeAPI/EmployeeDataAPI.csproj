@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>_20thSepTask_EmployeeAPI</RootNamespace>
   </PropertyGroup>
 
@@ -24,6 +24,7 @@
     <ProjectReference Include="..\EmployeeDataCore\EmployeeDataCore.csproj" />
     <ProjectReference Include="..\EmployeeDataService\EmployeeDataService.csproj" />
     <ProjectReference Include="..\EmployeeDomainModel\EmployeeDomainModel.csproj" />
+    <ProjectReference Include="..\ServiceRegistration\EmployeeDataDependencyInjection.csproj" />
   </ItemGroup>
 
 </Project>

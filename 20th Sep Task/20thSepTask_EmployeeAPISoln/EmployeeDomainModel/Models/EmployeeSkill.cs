@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace EmployeeDomainModel.Models
 {
-    public class Skill
+    public class EmployeeSkill
     {
+        public int Employee_Id { get; set; }
+        public Employee Employee { get; set; }
         public int Skill_Id { get; set; }
-        public string Name { get; set; }
-        public ICollection<Employee> Employees { get; set; }
-        public List<EmployeeSkill> EmployeeSkills { get;set; }
+        public Skill Skill { get; set; }
+
     }
 }

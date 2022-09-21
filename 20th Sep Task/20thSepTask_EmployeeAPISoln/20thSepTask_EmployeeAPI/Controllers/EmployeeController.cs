@@ -1,8 +1,12 @@
 ﻿using EmployeeDataCore.Abctractions;
 using EmployeeDataCore.ViewModel;
+using EmployeeDomainModel;
+using EmployeeDomainModel.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace _20thSepTask_EmployeeAPI.Controllers
@@ -11,40 +15,36 @@ namespace _20thSepTask_EmployeeAPI.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-        private readonly IEmployeeService _employeeService;
+        private readonly EmployeeDataContext _employeeDataContext;
 
-        public EmployeeController(IEmployeeService employeeService)
+        public EmployeeController(EmployeeDataContext employeeDataContext)
         {
-            _employeeService = employeeService;
+            _employeeDataContext = employeeDataContext;
         }
+
 
         [HttpGet]
-        [Route("GetEmployeesData")]
-        public async Task<IActionResult> GetEmployeesData()
+        public async Task<ActionResult<IEnumerable<Employee>>> Get()
         {
-            try
-            {
-                var result = await _employeeService.GetAllEmployees();
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
+
+            return await _employeeDataContext.Employees.Include(d => d.Skills).ToListAsync();
         }
 
-        [Route("InsertEmployee")]
+
         [HttpPost]
-        public async Task<IActionResult> InsertEmployee(EmployeeDto employeeDto)
+        public async Task<ActionResult<ActionResult<Employee>>> Post(Employee emp)
         {
             try
             {
-                await _employeeService.InsertEmployeeData(employeeDto);
-                return Ok("Data has been inserted successfully!!!");
+                Console.WriteLine(emp.Skills.Count);
+                _employeeDataContext.Employees.Add(emp);
+
+                await _employeeDataContext.SaveChangesAsync();
+                return Ok(emp);
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                return BadRequest(ex);
+                return StatusCode(500, e.Message);
             }
         }
     }

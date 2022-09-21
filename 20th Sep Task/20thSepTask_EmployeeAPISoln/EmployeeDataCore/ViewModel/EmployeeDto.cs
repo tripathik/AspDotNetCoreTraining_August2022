@@ -16,5 +16,6 @@ namespace EmployeeDataCore.ViewModel
         public string Email { get; set; }
         public string Lockstatus { get; set; }
         public decimal Experience { get; set; }
+        public List<SkillDto> Skills { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 using EmployeeDataCore;
 using EmployeeDataCore.Abctractions;
+using EmployeeDataDependencyInjection;
 using EmployeeDataService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,12 +32,13 @@ namespace _20thSepTask_EmployeeAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
-            services.AddServerSideBlazor();
-            services.AddHttpClient();
-            services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddControllers();
-            
+            services.AddSignalR();
+            var connString = _configuration[Keys.DBConnectionString];
+            services.AddDatabase(connString);
+            //services.AddSingleton<IEmployeeService, EmployeeService>();
+            services.AddWFM_DB(_configuration);
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "_20thSepTask_EmployeeAPI", Version = "v1" });
