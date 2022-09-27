@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Task3.Pages
 {
-    public class ManagerModel : PageModel
+    public class EmployeeData : PageModel
     {
         public void OnGet()
         {
